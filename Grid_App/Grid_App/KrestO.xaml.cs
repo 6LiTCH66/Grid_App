@@ -12,6 +12,7 @@ namespace Grid_App
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class KrestO : ContentPage
     {
+        
         Button btn, btn1, btn2;
         BoxView box;
         Label lbl;
@@ -19,8 +20,7 @@ namespace Grid_App
         Grid grid;
         void NewGame()
         {
-
-            Grid grid = new Grid();
+            grid = new Grid();
             for (int i = 0; i < 3; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
@@ -31,15 +31,13 @@ namespace Grid_App
                 for (int j = 0; j < 3; j++)
                 {
                     img = new Image { Source = ImageSource.FromFile("nn.png") };
-
                     grid.Children.Add(img, i, j);
                     var tap = new TapGestureRecognizer();
                     tap.Tapped += Tap_Tapped;
                     img.GestureRecognizers.Add(tap);
                 }
             }
-
-
+            
             btn = new Button()
             {
                 Text = "Reset the Game!",
@@ -62,14 +60,16 @@ namespace Grid_App
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,
             };
+           
 
 
             StackLayout stackLayout = new StackLayout()
             {
                 BackgroundColor = Color.Blue,
-                Children = { grid, btn, btn1, lbl }
+                Children = { grid, btn, btn1, lbl}
             };
             Content = stackLayout;
+            
         }
         public KrestO()
         {
@@ -86,16 +86,17 @@ namespace Grid_App
             };
             Content = stackLayout;
 
+
         }
 
         private void Btn2_Clicked(object sender, EventArgs e)
         {
             btn2.IsVisible = false;
             NewGame();
+            
         }
 
         
-
         int tp = 0;
         private void Tap_Tapped(object sender, EventArgs e)
         {
@@ -135,13 +136,13 @@ namespace Grid_App
 
             if (rand == 1)
             {
-                lbl.Text = "X";
+                DisplayAlert("Who first?", "X turn", "OK");
                 tp = 1;
                 
             }
             else if (rand == 2)
             {
-                lbl.Text = "0";
+                DisplayAlert("Who first?", "0 turn", "OK");
                 tp = 2;
             }
             btn1.IsEnabled = false;
